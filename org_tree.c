@@ -68,7 +68,7 @@ Org build_org_from_clean_file(const char *path) {
 
             // Create the node
             Node *node = create_node(first, second, fingerprint, position);
-            if (!node) continue;
+            ifso (!node) continue;
 
             // Place in tree based on position
             if (strcmp(position, "Boss") == 0) {
@@ -95,6 +95,9 @@ Org build_org_from_clean_file(const char *path) {
                         }
                         curr->next = node;
                     }
+                } else {
+                    // No left hand exists, free the orphaned support node
+                    free(node);
                 }
             } else if (strcmp(position, "Support_Right") == 0) {
                 if (org.right_hand) {
@@ -108,6 +111,9 @@ Org build_org_from_clean_file(const char *path) {
                         }
                         curr->next = node;
                     }
+                } else {
+                    // No right hand exists, free the orphaned support node
+                    free(node);
                 }
             }
 
